@@ -54,63 +54,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget imageSlider() {
     return Container(
-      child: Column(
-        children: <Widget>[
-          CarouselSlider(
-            items: carouselSliderList(imageUrl),
-            aspectRatio: 2,
-            viewportFraction: 0.8,
-            initialPage: 0,
-            autoPlay: true,
-            autoPlayInterval: Duration(seconds: 2),
-            autoPlayAnimationDuration: Duration(milliseconds: 800),
-            pauseAutoPlayOnTouch: Duration(seconds: 2),
-            enlargeCenterPage: true,
-            onPageChanged: (index) {
-              setState(() {
-                _current = index;
-              });
-            },
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: map<Widget>(
-              imageUrl,
-              (index, url) {
-                return dots(_current, index);
-              },
-            ),
-          )
-        ],
+      child: CarouselSlider(
+        items: carouselSliderList(imageUrl),
+        aspectRatio: 2,
+        viewportFraction: 0.7,
+        initialPage: 0,
+        autoPlay: true,
+        autoPlayInterval: Duration(seconds: 2),
+        autoPlayAnimationDuration: Duration(milliseconds: 800),
+        pauseAutoPlayOnTouch: Duration(seconds: 2),
+        enlargeCenterPage: true,
       ),
     );
   }
 
-  Widget dots(int current, int index) {
-    if (current != index) {
-      return Container(
-        width: 8.0,
-        height: 8.0,
-        margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: _current == index
-                ? Color.fromRGBO(0, 0, 0, 0.9)
-                : Color.fromRGBO(0, 0, 0, 0.4)),
-      );
-    } else {
-      return Container(
-        width: 8.0,
-        height: 8.0,
-        margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: _current == index
-                ? Color.fromRGBO(0, 0, 0, 0.9)
-                : Color.fromRGBO(0, 0, 0, 0.4)),
-      );
-    }
-  }
+
 
   List<Widget> carouselSliderList(List<String> imageUrl) {
     return imageUrl.map((i) {
