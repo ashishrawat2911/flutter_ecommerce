@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/uitls/corousel_slider.dart';
 
@@ -26,12 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: _appbarSearch(),
-        actions: <Widget>[Icon(Icons.notifications)],
-      ),
       body: ListView(
-        children: <Widget>[imageSlider(), topDealsSection()],
+        children: <Widget>[_appbarSearch(), imageSlider(), topDealsSection()],
       ),
     );
   }
@@ -41,8 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
       children: <Widget>[
         Card(
           child: Container(
-            height: MediaQuery.of(context).size.height / 3,
-            width: MediaQuery.of(context).size.width / 2,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
