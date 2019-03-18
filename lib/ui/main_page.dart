@@ -18,18 +18,19 @@ class _MainPageState extends State<MainPage> {
   final menu = new Menu(
     items: [
       new MenuItem(
+        icon: Icons.home,
         id: 'home',
         title: 'Home',
       ),
-      new MenuItem(
+      new MenuItem(icon: Icons.card_giftcard,
         id: 'category',
         title: 'Category',
       ),
-      new MenuItem(
+      new MenuItem(icon: Icons.shopping_cart,
         id: 'cart',
         title: 'Cart',
       ),
-      new MenuItem(
+      new MenuItem(icon: Icons.person,
         id: 'account',
         title: 'Account',
       ),
@@ -88,20 +89,17 @@ class _MainPageState extends State<MainPage> {
       ),
     );
   }
-  String appBarName(){
+
+  String appBarName() {
     if (selectedMenuItemId == "home") {
       return "Home";
-    }
-   else if (selectedMenuItemId == "category") {
+    } else if (selectedMenuItemId == "category") {
       return "Category";
-    }
-    else if (selectedMenuItemId == "account") {
+    } else if (selectedMenuItemId == "account") {
       return "Account";
-    }
-    else if (selectedMenuItemId == "cart") {
+    } else if (selectedMenuItemId == "cart") {
       return "Cart";
-    }
-    else{
+    } else {
       return "";
     }
   }

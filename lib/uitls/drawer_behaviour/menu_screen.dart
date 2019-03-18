@@ -140,6 +140,7 @@ class _MenuViewState extends State<MenuView> with TickerProviderStateMixin {
 
       var listItem = new _MenuListItem(
         title: widget.menu.items[i].title,
+        icon: widget.menu.items[i].icon,
         isSelected: isSelected,
         selectorColor: selectorColor,
         textStyle: textStyle,
@@ -388,6 +389,7 @@ class _AnimatedMenuListItemState
 
 class _MenuListItem extends StatelessWidget {
   final String title;
+  final IconData icon;
   final bool isSelected;
   final Function() onTap;
   final Color selectorColor;
@@ -396,6 +398,7 @@ class _MenuListItem extends StatelessWidget {
 
   _MenuListItem(
       {this.title,
+      this.icon,
       this.isSelected,
       this.onTap,
       this.menuView,
@@ -417,12 +420,17 @@ class _MenuListItem extends StatelessWidget {
                 left: BorderSide(
                     color: isSelected ? selectorColor : Colors.transparent,
                     width: 5.0))),
-        child: new Padding(
-          padding: menuView.padding,
-          child: new Text(
-            title,
-            style: _textStyle,
-          ),
+        child: Row(
+          children: <Widget>[
+            Icon(icon),
+            new Padding(
+              padding: menuView.padding,
+              child: new Text(
+                title,
+                style: _textStyle,
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -440,9 +448,7 @@ class Menu {
 class MenuItem {
   final String id;
   final String title;
+  final IconData icon;
 
-  MenuItem({
-    this.id,
-    this.title,
-  });
+  MenuItem({this.id, this.title, this.icon});
 }
