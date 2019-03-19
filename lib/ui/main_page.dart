@@ -3,7 +3,8 @@ import 'package:flutter_ecommerce/ui/account.dart';
 import 'package:flutter_ecommerce/ui/cart.dart';
 import 'package:flutter_ecommerce/ui/category.dart';
 import 'package:flutter_ecommerce/ui/home_screen.dart';
-import 'package:flutter_ecommerce/uitls/drawer_behaviour/drawerbehavior.dart';
+import 'package:flutter_ecommerce/utils/drawer_behaviour/drawer_scaffold.dart';
+import 'package:flutter_ecommerce/utils/drawer_behaviour/menu_screen.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -22,15 +23,18 @@ class _MainPageState extends State<MainPage> {
         id: 'home',
         title: 'Home',
       ),
-      new MenuItem(icon: Icons.card_giftcard,
+      new MenuItem(
+        icon: Icons.card_giftcard,
         id: 'category',
         title: 'Category',
       ),
-      new MenuItem(icon: Icons.shopping_cart,
+      new MenuItem(
+        icon: Icons.shopping_cart,
         id: 'cart',
         title: 'Cart',
       ),
-      new MenuItem(icon: Icons.person,
+      new MenuItem(
+        icon: Icons.person,
         id: 'account',
         title: 'Account',
       ),

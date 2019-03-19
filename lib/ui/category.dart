@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class CategoryPage extends StatefulWidget {
@@ -11,34 +13,18 @@ class _CategoryPageState extends State<CategoryPage> {
     return Scaffold(
       body: ListView(
         shrinkWrap: true,
-        children: <Widget>[
-          Text("Category"),
-          Text("List Item"),
-          GridView.count(
-            physics: new NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            primary: true,
-            padding: const EdgeInsets.all(20.0),
-            crossAxisSpacing: 10.0,
-            crossAxisCount: 2,
-            children: <Widget>[
-              const Text('He\'d have you all unravel at the'),
-              const Text('Heed not the rabble'),
-              const Text('Sound of screams but the'),
-              const Text('Who scream'),
-              const Text('Revolution is coming...'),
-              const Text('Revolution, they...'),
-            ],
-          ),
-          Text("List Item"),
-          Text("List Item"),
-          Text("List Item"),
-          Text("List Item"),
-          Text("List Item"),
-          Text("List Item"),
-          Text("List Item"),
-          Text("List Item"),
-        ],
+        children: <Widget>[listViewItem(), listViewItem(), listViewItem()],
+      ),
+    );
+  }
+
+  Widget listViewItem() {
+    return Card(
+      child: Container(
+        decoration: BoxDecoration(),
+        height: MediaQuery.of(context).size.height / 3,
+        child: Image.network(
+            "https://cdn.dribbble.com/users/172256/screenshots/672295/entry13.jpg"),
       ),
     );
   }

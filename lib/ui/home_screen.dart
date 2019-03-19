@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/uitls/corousel_slider.dart';
+import 'package:flutter_ecommerce/utils/corousel_slider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -7,7 +7,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _current = 0;
   List<String> imageUrl;
 
   @override
@@ -26,29 +25,23 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        children: <Widget>[_appbarSearch(), imageSlider(), topDealsSection()],
-      ),
-    );
-  }
-
-  Widget _appbarSearch() {
-    return Row(
-      children: <Widget>[
-        Card(
-          child: Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Icon(Icons.search),
-                SizedBox(
-                  width: 5.0,
-                ),
-                Text("Search Items"),
-              ],
-            ),
+        physics: BouncingScrollPhysics(),
+        children: <Widget>[
+          imageSlider(),
+          SizedBox(
+            height: 10,
           ),
-        ),
-      ],
+          topDealsSection(),
+          SizedBox(
+            height: 10,
+          ),
+          topDealsSection(),
+          SizedBox(
+            height: 10,
+          ),
+          topDealsSection()
+        ],
+      ),
     );
   }
 
@@ -68,8 +61,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-
-
   List<Widget> carouselSliderList(List<String> imageUrl) {
     return imageUrl.map((i) {
       return Builder(builder: (BuildContext context) {
@@ -78,29 +69,22 @@ class _HomeScreenState extends State<HomeScreen> {
     }).toList();
   }
 
-  Widget imageSliderItem(String name) {
+  Widget imageSliderItem(String url) {
     return Card(
       child: Container(
-          height: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height / 6,
           padding: EdgeInsets.all(5.0),
           margin: EdgeInsets.symmetric(horizontal: 5.0),
           child: Image.network(
-            name,
-            fit: BoxFit.fitHeight,
+            url,
+            fit: BoxFit.fitWidth,
           )),
     );
   }
 
-  List<T> map<T>(List list, Function handler) {
-    List<T> result = [];
-    for (var i = 0; i < list.length; i++) {
-      result.add(handler(i, list[i]));
-    }
-    return result;
-  }
-
   Widget topDealsSection() {
-    return Card(
+    return Container(
+      color: Colors.blue,
       child: Column(
         children: <Widget>[
           Stack(
@@ -109,15 +93,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "Deals of the Day",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.0,
+                      color: Colors.black),
                 ),
               ),
               Align(
                 alignment: Alignment.topRight,
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: MaterialButton(
-                    height: 40.0,
+                  padding: const EdgeInsets.only(top: 10.0, right: 10.0),
+                  child: RaisedButton(
+                    disabledColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
                     onPressed: null,
                     color: Colors.white,
                     child: Text(
@@ -129,26 +118,30 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          dealsGrid()
+          Divider(
+            height: 5,
+          ),
+          dealsGrid(),
+          SizedBox(
+            height: 10,
+          )
         ],
       ),
     );
   }
 
   Widget dealsGrid() {
-    return Container(
-        child: Column(
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[dealsItem(), dealsItem()],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[dealsItem(), dealsItem()],
-        )
-      ],
-    ));
+    return Card(
+      margin: EdgeInsets.only(top: 10, bottom: 10, right: 10, left: 10),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      child: Container(
+          child: GridView.count(
+        shrinkWrap: true,
+        crossAxisCount: 2,
+        physics: NeverScrollableScrollPhysics(),
+        children: <Widget>[dealsItem(), dealsItem(), dealsItem(), dealsItem()],
+      )),
+    );
   }
 
   Widget dealsItem() {
@@ -156,13 +149,23 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
+          SizedBox(
+            height: 10,
+          ),
           Image.network(
             "https://i.pinimg.com/originals/24/7a/0a/247a0a55e5e6aa0cb2215f375b85dc67.png",
-            height: MediaQuery.of(context).size.height / 5.5,
-            width: MediaQuery.of(context).size.width / 2.2,
+            fit: BoxFit.fitHeight,
+            height: 100,
+            width: MediaQuery.of(context).size.width / 2.5,
           ),
-          Text("Nike Shoes"),
-          Text("Rs 5000")
+          Text(
+            "Nike Shoes",
+            style: TextStyle(color: Colors.black),
+          ),
+          Text(
+            "Rs 5000",
+            style: TextStyle(color: Colors.black),
+          )
         ],
       ),
     );

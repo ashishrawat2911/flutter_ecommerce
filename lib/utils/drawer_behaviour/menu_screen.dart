@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/uitls/drawer_behaviour/drawer_scaffold.dart';
+import 'package:flutter_ecommerce/utils/drawer_behaviour/drawer_scaffold.dart';
+
 
 final menuScreenKey = new GlobalKey(debugLabel: 'MenuScreen');
 
