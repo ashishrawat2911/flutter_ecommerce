@@ -60,11 +60,17 @@ class _MainPageState extends State<MainPage> {
     return new DrawerScaffold(
       percentage: 0.8,
       cornerRadius: 20,
-      appBar: AppBarProps(title: Text(appBarName())),
+      appBar: AppBarProps(
+          title: Text(
+        appBarName(),
+        style: TextStyle(
+          fontFamily: "MyFont",
+        ),
+      )),
       menuView: new MenuView(
         selectorColor: Colors.black,
         menu: menu,
-        headerView: headerView(context),
+        headerView: SizedBox(height: 50,),
         animation: true,
         mainAxisAlignment: MainAxisAlignment.start,
         color: Theme.of(context).primaryColor,

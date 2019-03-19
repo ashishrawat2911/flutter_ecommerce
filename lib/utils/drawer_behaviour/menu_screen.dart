@@ -409,11 +409,11 @@ class _MenuListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextStyle _textStyle =
-        textStyle.copyWith(color: isSelected ? selectorColor : textStyle.color);
+        textStyle.copyWith(color: isSelected ? selectorColor : textStyle.color, fontFamily: "MyFont",);
 
     return new InkWell(
       splashColor: const Color(0x44000000),
-      onTap: isSelected ? null : onTap,
+      onTap: onTap,
       child: Container(
         width: double.infinity,
         decoration: ShapeDecoration(
@@ -423,6 +423,7 @@ class _MenuListItem extends StatelessWidget {
                     width: 5.0))),
         child: Row(
           children: <Widget>[
+            SizedBox(width: 5,),
             Icon(icon),
             new Padding(
               padding: menuView.padding,

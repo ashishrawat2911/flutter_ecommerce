@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: CarouselSlider(
         items: carouselSliderList(imageUrl),
         aspectRatio: 2,
-        viewportFraction: 0.7,
+        viewportFraction: 0.6,
         initialPage: 0,
         autoPlay: true,
         autoPlayInterval: Duration(seconds: 2),
@@ -71,13 +71,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget imageSliderItem(String url) {
     return Card(
+      color: Color(0X000000),
       child: Container(
-          height: MediaQuery.of(context).size.height / 6,
+          width: MediaQuery.of(context).size.width / 1.1,
           padding: EdgeInsets.all(5.0),
           margin: EdgeInsets.symmetric(horizontal: 5.0),
           child: Image.network(
             url,
-            fit: BoxFit.fitWidth,
+            fit: BoxFit.fitHeight,
           )),
     );
   }
@@ -93,10 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
                   "Deals of the Day",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18.0,
-                      color: Colors.black),
+                  style: TextStyle(fontSize: 18.0, color: Colors.white),
                 ),
               ),
               Align(
@@ -111,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white,
                     child: Text(
                       "View All",
-                      style: TextStyle(color: Colors.grey),
+                      style: TextStyle(color: Colors.black),
                     ),
                   ),
                 ),
@@ -146,15 +144,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget dealsItem() {
     return GestureDetector(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+      child: Column(mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           SizedBox(
             height: 10,
           ),
           Image.network(
             "https://i.pinimg.com/originals/24/7a/0a/247a0a55e5e6aa0cb2215f375b85dc67.png",
-            fit: BoxFit.fitHeight,
             height: 100,
             width: MediaQuery.of(context).size.width / 2.5,
           ),
