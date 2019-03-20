@@ -28,18 +28,18 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: <Widget>[
             imageSlider(),
-//            SizedBox(
-//              height: 10,
-//            ),
+            SizedBox(
+              height: 10,
+            ),
             topDealsSection(),
-//            SizedBox(
-//              height: 10,
-//            ),
-//            topDealsSection(),
-//            SizedBox(
-//              height: 10,
-//            ),
-//            topDealsSection()
+            SizedBox(
+              height: 10,
+            ),
+            topDealsSection(),
+            SizedBox(
+              height: 10,
+            ),
+            topDealsSection()
           ],
         ),
       ),
@@ -139,16 +139,15 @@ class _HomeScreenState extends State<HomeScreen> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Container(
         padding: EdgeInsets.all(10),
-        child: Column(
+        child: GridView.count(
+          shrinkWrap: true,
+          crossAxisCount: 2,
+          physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[dealsItem(), dealsItem()],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[dealsItem(), dealsItem()],
-            )
+            dealsItem(),
+            dealsItem(),
+            dealsItem(),
+            dealsItem(),
           ],
         ),
       ),
@@ -161,12 +160,9 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          SizedBox(
-            height: 10,
-          ),
           Image.network(
             "https://i.pinimg.com/originals/24/7a/0a/247a0a55e5e6aa0cb2215f375b85dc67.png",
-            height: 100,
+            height: MediaQuery.of(context).size.height / 6,
             width: MediaQuery.of(context).size.width / 2.5,
           ),
           Text(

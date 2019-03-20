@@ -7,7 +7,9 @@ import 'package:flutter_ecommerce/bloc/menu_provider.dart';
 
 class MenuBloc {
   final counterController = StreamController();
+
   final MenuProvider provider = MenuProvider();
+
   Stream get getMenu => counterController.stream; // create a getter for our Stream
 
 
