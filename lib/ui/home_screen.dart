@@ -24,23 +24,24 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        physics: BouncingScrollPhysics(),
-        children: <Widget>[
-          imageSlider(),
-          SizedBox(
-            height: 10,
-          ),
-          topDealsSection(),
-          SizedBox(
-            height: 10,
-          ),
-          topDealsSection(),
-          SizedBox(
-            height: 10,
-          ),
-          topDealsSection()
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            imageSlider(),
+//            SizedBox(
+//              height: 10,
+//            ),
+            topDealsSection(),
+//            SizedBox(
+//              height: 10,
+//            ),
+//            topDealsSection(),
+//            SizedBox(
+//              height: 10,
+//            ),
+//            topDealsSection()
+          ],
+        ),
       ),
     );
   }
@@ -76,9 +77,12 @@ class _HomeScreenState extends State<HomeScreen> {
           width: MediaQuery.of(context).size.width / 1.1,
           padding: EdgeInsets.all(5.0),
           margin: EdgeInsets.symmetric(horizontal: 5.0),
-          child: Image.network(
-            url,
-            fit: BoxFit.fitHeight,
+          child: FutureBuilder(
+            builder: (BuildContext context, AsyncSnapshot snapshot) =>
+                Image.network(
+                  url,
+                  fit: BoxFit.fitHeight,
+                ),
           )),
     );
   }
@@ -88,7 +92,8 @@ class _HomeScreenState extends State<HomeScreen> {
       color: Colors.blue,
       child: Column(
         children: <Widget>[
-          Stack(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(12.0),
@@ -133,18 +138,27 @@ class _HomeScreenState extends State<HomeScreen> {
       margin: EdgeInsets.only(top: 10, bottom: 10, right: 10, left: 10),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Container(
-          child: GridView.count(
-        shrinkWrap: true,
-        crossAxisCount: 2,
-        physics: NeverScrollableScrollPhysics(),
-        children: <Widget>[dealsItem(), dealsItem(), dealsItem(), dealsItem()],
-      )),
+        padding: EdgeInsets.all(10),
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[dealsItem(), dealsItem()],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[dealsItem(), dealsItem()],
+            )
+          ],
+        ),
+      ),
     );
   }
 
   Widget dealsItem() {
     return GestureDetector(
-      child: Column(mainAxisSize: MainAxisSize.min,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           SizedBox(

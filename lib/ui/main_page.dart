@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/ui/account.dart';
-import 'package:flutter_ecommerce/ui/cart.dart';
-import 'package:flutter_ecommerce/ui/category.dart';
-import 'package:flutter_ecommerce/ui/home_screen.dart';
+import 'package:flutter_ecommerce/bloc/menu_bloc.dart';
+import 'package:flutter_ecommerce/bloc/menu_provider.dart';
 import 'package:flutter_ecommerce/utils/drawer_behaviour/drawer_scaffold.dart';
 import 'package:flutter_ecommerce/utils/drawer_behaviour/menu_screen.dart';
+
+import 'account.dart';
+import 'cart.dart';
+import 'category.dart';
+import 'home_screen.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -13,9 +16,10 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   HomeScreen homeScreen = new HomeScreen();
-  CategoryPage categoryPage = new CategoryPage();
-  AccountScreen accountScreen = new AccountScreen();
-  CartScreen _cartScreen = new CartScreen();
+  AccountScreen accountScreen = AccountScreen();
+  CartScreen cartScreen = CartScreen();
+  CategoryPage categoryPage = CategoryPage();
+  final bloc = MenuBloc();
   final menu = new Menu(
     items: [
       new MenuItem(
@@ -55,52 +59,63 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
+  void updateMenu(String itemId) {
+    bloc.updateCount(itemId);
+  }
+
+  @override
+  void dispose() {
+    bloc.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return new DrawerScaffold(
-      percentage: 0.8,
-      cornerRadius: 20,
-      appBar: AppBarProps(
-          title: Text(
-        appBarName(),
-        style: TextStyle(
-          fontFamily: "MyFont",
-        ),
-      )),
-      menuView: new MenuView(
-        selectorColor: Colors.black,
-        menu: menu,
-        headerView: SizedBox(height: 50,),
-        animation: true,
-        mainAxisAlignment: MainAxisAlignment.start,
-        color: Theme.of(context).primaryColor,
-        selectedItemId: selectedMenuItemId,
-        onMenuItemSelected: (String itemId) {
-          selectedMenuItemId = itemId;
-          setState(() {});
-        },
-      ),
-      contentView: Screen(
-        contentBuilder: (context) {
-          if (selectedMenuItemId == "home") {
-            return homeScreen;
-          }
-          if (selectedMenuItemId == "category") {
-            return categoryPage;
-          }
-          if (selectedMenuItemId == "home") {
-            return accountScreen;
-          }
-          if (selectedMenuItemId == "cart") {
-            return _cartScreen;
-          }
-        },
-        color: Colors.white,
-      ),
+    return StreamBuilder(
+      stream: bloc.getMenu, // pass our Stream getter here
+      initialData: MenuProvider().selectedMenuItemId,
+      builder: (context, snapshot) => new DrawerScaffold(
+            percentage: 0.8,
+            cornerRadius: 20,
+            appBar: AppBarProps(
+                title: Text(
+              appBarName(bloc.provider.selectedMenuItemId),
+              style: TextStyle(
+                fontFamily: "MyFont",
+              ),
+            )),
+            menuView: new MenuView(
+              selectorColor: Colors.black,
+              menu: menu,
+              headerView: SizedBox(
+                height: 50,
+              ),
+              animation: true,
+              mainAxisAlignment: MainAxisAlignment.start,
+              color: Theme.of(context).primaryColor,
+              selectedItemId: bloc.provider.selectedMenuItemId,
+              onMenuItemSelected: updateMenu,
+            ),
+            contentView: Screen(
+              contentBuilder: (context) {
+                if (bloc.provider.selectedMenuItemId == "home") {
+                  return homeScreen;
+                } else if (bloc.provider.selectedMenuItemId == "category") {
+                  return categoryPage;
+                } else if (bloc.provider.selectedMenuItemId == "account") {
+                  return accountScreen;
+                } else if (bloc.provider.selectedMenuItemId == "cart") {
+                  return cartScreen;
+                } else
+                  return homeScreen;
+              },
+              color: Colors.white,
+            ),
+          ),
     );
   }
 
-  String appBarName() {
+  String appBarName(String selectedMenuItemId) {
     if (selectedMenuItemId == "home") {
       return "Home";
     } else if (selectedMenuItemId == "category") {
