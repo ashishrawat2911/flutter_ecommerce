@@ -1,7 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/utils/corousel_slider.dart';
+import 'package:flutter_ecommerce/src/utils/corousel_slider.dart';
+
 
 class CategoryPage extends StatefulWidget {
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_ecommerce/ui/main_page.dart';
+import 'package:flutter_ecommerce/src/ui/main_page.dart';
+
 
 void main() => runApp(MyApp());
 

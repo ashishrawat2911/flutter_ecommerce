@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/bloc/menu_bloc.dart';
-import 'package:flutter_ecommerce/bloc/menu_provider.dart';
-import 'package:flutter_ecommerce/utils/drawer_behaviour/drawer_scaffold.dart';
-import 'package:flutter_ecommerce/utils/drawer_behaviour/menu_screen.dart';
+import 'package:flutter_ecommerce/src/bloc/menu_bloc.dart';
+import 'package:flutter_ecommerce/src/bloc/menu_provider.dart';
+import 'package:flutter_ecommerce/src/utils/drawer_behaviour/drawer_scaffold.dart';
+import 'package:flutter_ecommerce/src/utils/drawer_behaviour/menu_screen.dart';
 
 import 'account.dart';
 import 'cart.dart';

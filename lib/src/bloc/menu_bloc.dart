@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_ecommerce/bloc/menu_provider.dart';
+import 'package:flutter_ecommerce/src/bloc/menu_provider.dart';
 // import 'package:rxdart/rxdart.dart'; if you want to make use of PublishSubject, ReplaySubject or BehaviourSubject.
 // make sure you have rxdart: as a dependency in your pubspec.yaml file to use the above import
 
@@ -23,7 +23,7 @@ class MenuBloc {
   }
 }
 
-final bloc = MenuBloc(); // create an instance of the counter bloc
+final bloc = MenuBloc(); // create an instance of the counter src.bloc
 
 //======= end of CounterBloc file
 

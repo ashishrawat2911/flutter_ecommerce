@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/utils/corousel_slider.dart';
+import 'package:flutter_ecommerce/src/utils/corousel_slider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -11,7 +11,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-   
     super.initState();
     imageUrl = [
       "https://i.pinimg.com/originals/24/7a/0a/247a0a55e5e6aa0cb2215f375b85dc67.png",
@@ -25,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: <Widget>[
             imageSlider(),
